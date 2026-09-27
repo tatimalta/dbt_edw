@@ -1,8 +1,7 @@
-
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'my_new_project'
+name: 'dbt_edw'
 version: '1.0.0'
 config-version: 2
 
@@ -19,11 +18,11 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target"  # directory which will store compiled SQL files
-clean-targets:         # directories to be removed by `dbt clean`
+target-path: "target"
+
+clean-targets:
   - "target"
   - "dbt_packages"
-
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -36,7 +35,26 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+  dbt_edw:
+
+    edw_trans:
+      +database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
+      employee:
+        +schema: employee
+        +materialized: table
+      customer:
+        +schema: customer
+        +materialized: table
+        
+    edw_pres:
+      +database: "{{ 'dev_analytics_ewd' if target.name == 'dev' else 'qa_analytics_ewd' if target.name == 'qa' else 'prod_analytics_ewd' }}"
+      +schema: pres
+      +materialized: view
+seeds:
+  +database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
+  +schema: master
+
+snapshots:
+  employee:
+    +database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
+    +schema: empoyee
