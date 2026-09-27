@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: employee_source
+    database: |
+      {% if target.name == 'dev' %}
+        dev_raw_edw
+      {% elif target.name == 'qa' %}
+        qa_raw_edw
+      {% elif target.name == 'prod' %}
+        prod_raw_edw
+      {% else %}
+        Invalid database
+      {% endif %}
+    schema: EMPLOYEE
+    tables:
+      - name: emp
+        description: "Employee source data"
+  - name: customer_source
+    database: |
+      {% if target.name == 'dev' %}
+        dev_raw_edw
+      {% elif target.name == 'qa' %}
+        qa_raw_edw
+      {% elif target.name == 'prod' %}
+        prod_raw_edw
+      {% else %}
+        Invalid database
+      {% endif %}
+    schema: customer
+    tables:
+      - name: customer
+        description: "customer source data"
