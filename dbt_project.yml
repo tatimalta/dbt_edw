@@ -55,6 +55,7 @@ seeds:
   +schema: master
 
 snapshots:
-  employee:
-    +database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
-    +schema: empoyee
+  dbt_edw:
+    employee:
+      +target_database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
+      +target_schema: employee
