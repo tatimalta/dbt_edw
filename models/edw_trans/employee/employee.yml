@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: employee_data
+    description: "Employee dimension table containing employee personal and location details."
+    columns:
+      - name: emp_id
+        description: "Primary key. Unique identifier for the employee."
+        tests:
+          - unique
+          - not_null
+
+      - name: ename
+        description: "Full name of the employee."
+        tests:
+          - not_null
+
+      - name: address
+        description: "Residential or mailing street address of the employee."
+
+      - name: state
+        description: "State or province of the employee residence."
+
+      - name: country
+        description: "Country where the employee resides."
+        tests:
+          - not_null
+
+      - name: zip
+        description: "Postal or ZIP code of the employee address."

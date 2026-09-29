@@ -16,6 +16,29 @@ sources:
     tables:
       - name: emp
         description: "Employee source data"
+        columns:
+          - name: emp_id
+            description: "Primary identifier for each employee."
+            tests:
+              - unique
+              - not_null
+
+          - name: ename
+            description: "Full name of the employee."
+            tests:
+              - not_null
+
+          - name: address
+            description: "Street address."
+
+          - name: state
+            description: "State or region code/name."
+
+          - name: country
+            description: "Country name or code."
+
+          - name: zip
+            description: "Postal/ZIP code."
   - name: customer_source
     database: |
       {% if target.name == 'dev' %}
