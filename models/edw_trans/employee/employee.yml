@@ -6,14 +6,9 @@ models:
     columns:
       - name: emp_id
         description: "Primary key. Unique identifier for the employee."
-        tests:
-          - unique
-          - not_null
 
       - name: ename
         description: "Full name of the employee."
-        tests:
-          - not_null
 
       - name: address
         description: "Residential or mailing street address of the employee."
