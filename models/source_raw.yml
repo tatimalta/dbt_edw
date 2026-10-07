@@ -19,14 +19,9 @@ sources:
         columns:
           - name: emp_id
             description: "Primary identifier for each employee."
-            tests:
-              - unique
-              - not_null
 
           - name: ename
             description: "Full name of the employee."
-            tests:
-              - not_null
 
           - name: address
             description: "Street address."

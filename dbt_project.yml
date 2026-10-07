@@ -38,7 +38,7 @@ models:
   dbt_edw:
 
     edw_trans:
-      +database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
+      +database: "{{ 'dev_tran_edw' if target.name == 'dev' else 'qa_tran_edw' if target.name == 'qa' else 'PROD_TRAN_EDW' }}"
       employee:
         +schema: employee
         +materialized: table
@@ -47,15 +47,15 @@ models:
         +materialized: table
         
     edw_pres:
-      +database: "{{ 'dev_analytics_ewd' if target.name == 'dev' else 'qa_analytics_ewd' if target.name == 'qa' else 'prod_analytics_ewd' }}"
+      +database: "{{ 'dev_analytics_edw' if target.name == 'dev' else 'qa_analytics_edw' if target.name == 'qa' else 'PROD_ANALYTICS_EDW' }}"
       +schema: pres
       +materialized: view
 seeds:
-  +database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
+  +database: "{{ 'dev_tran_edw' if target.name == 'dev' else 'qa_tran_edw' if target.name == 'qa' else 'PROD_TRAN_EDW' }}"
   +schema: master
 
 snapshots:
   dbt_edw:
     employee:
-      +target_database: "{{ 'dev_tran_ewd' if target.name == 'dev' else 'qa_tran_ewd' if target.name == 'qa' else 'prod_tran_ewd' }}"
+      +target_database: "{{ 'dev_tran_edw' if target.name == 'dev' else 'qa_tran_edw' if target.name == 'qa' else 'PROD_TRAN_EDW' }}"
       +target_schema: employee
